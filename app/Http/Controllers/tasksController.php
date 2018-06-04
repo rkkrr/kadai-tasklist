@@ -47,7 +47,7 @@ class tasksController extends Controller
     {
         //var_dump($request);
           $this->validate($request, [
-            'content' => 'required|max:191',
+            'content' => 'required|max:10',
         ]);
         $tasks = new Task;
         $tasks->content = $request->content;
@@ -96,7 +96,7 @@ class tasksController extends Controller
     public function update(Request $request, $id)
     {
         $this->validate($request, [
-            'content' => 'required|max:191',
+            'content' => 'required|max:10',
         ]);
         $tasks = Task::find($id);
         $tasks->content = $request->content;
