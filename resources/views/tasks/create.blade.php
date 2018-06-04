@@ -12,9 +12,6 @@
         </ul>
     @endif
 
-
-    <h1>メッセージ新規作成ページ</h1>
-
     {!! Form::model($tasks, ['route' => 'tasks.store']) !!}
 
         {!! Form::label('content', 'メッセージ:') !!}
