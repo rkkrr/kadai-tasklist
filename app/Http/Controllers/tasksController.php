@@ -46,6 +46,9 @@ class tasksController extends Controller
     public function store(Request $request)
     {
         //var_dump($request);
+          $this->validate($request, [
+            'content' => 'required|max:191',
+        ]);
         $tasks = new Task;
         $tasks->content = $request->content;
         $tasks->save();
