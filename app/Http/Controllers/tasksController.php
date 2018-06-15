@@ -72,7 +72,6 @@ class tasksController extends Controller
     public function store(Request $request)
     
     {
-        if (\Auth::check()) {
           $this->validate($request, [
             'staus' => 'required|max:191',
             'content' => 'required|max:191',
@@ -86,10 +85,9 @@ class tasksController extends Controller
         // $tasks->content = $request->content;
         //  $tasks->save();
         
-    }else{
         return redirect('/');
     }
-    }
+    
 
     /**
      * Display the specified resource.
@@ -140,20 +138,18 @@ class tasksController extends Controller
      */
     public function update(Request $request, $id)
     {
-        if (\Auth::check()) {
+      
         $this->validate($request, [
-            'status' => 'required|max:10', 
+            'staus' => 'required|max:10', 
             'content' => 'required|max:10',
         ]);
         $tasks = Task::find($id);
-        $tasks->status = $request->status;
+        $tasks->staus = $request->staus;
         $tasks->content = $request->content;
         $tasks->save();
+  return redirect('/');
 
-    }
-    else{
-        return redirect('/');
-    }
+    
     }
 
     /**
@@ -167,7 +163,8 @@ class tasksController extends Controller
         if (\Auth::check()) {
           $tasks = Task::find($id);
         $tasks->delete();
-
+    }
+    else{
         return redirect('/');
     }
     }
