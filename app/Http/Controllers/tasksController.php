@@ -95,20 +95,30 @@ class tasksController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
-    {
-        if (\Auth::check()) {
-          $tasks = Task::find($id);
+    //  public function show($id)
+    //  {
+    //      if (\Auth::id() === $tasks->user_id) {
+          
+    //       if (\Auth::check()) {
+    //         $tasks = Task::find($id);
 
+    //      return view('tasks.show', [
+    //          'tasks' => $tasks,
+    //      ]);
+
+public function show($id)
+    {
+          $tasks = \App\Task::find($id);
+        if (\Auth::id() === $tasks->user_id){
         return view('tasks.show', [
             'tasks' => $tasks,
         ]);
+        }
 
-    }
-    else{
-        return redirect('/');
-    }
-    }
+       else{
+            return redirect('/');
+        }
+}
 
     /**
      * Show the form for editing the specified resource.
@@ -116,19 +126,33 @@ class tasksController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
-    {
-        if (\Auth::check()) {
-            $tasks = Task::find($id);
+//      public function edit($id)
+//      {
+//          if (\Auth::id() === $tasks->user_id) {
+//              $tasks = Task::find($id);
 
+//          return view('tasks.edit', [
+//              'tasks' => $tasks,
+//          ]);
+//      }
+//      else{
+//       return redirect('/');
+//      }
+//  }
+
+public function edit($id)
+    {
+        $tasks = \App\Task::find($id);
+    if (\Auth::id() === $tasks->user_id){
         return view('tasks.edit', [
             'tasks' => $tasks,
         ]);
     }
-    else{
-        return redirect('/');
+        else{
+            return redirect('/');
+        }
     }
-}
+
     /**
      * Update the specified resource in storage.
      *
@@ -159,13 +183,17 @@ class tasksController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
-    {
-        if (\Auth::check()) {
-          $tasks = Task::find($id);
-        $tasks->delete();
-    }
-    else{
+    {$tasks = \App\Task::find($id);
+      if (\Auth::id() === $tasks->user_id) {
+         
+            $tasks->delete();
+        }
         return redirect('/');
     }
-    }
 }
+
+
+//  if (\Auth::id() === $tasks->user_id){
+//         return view('tasks.edit', [
+//             'tasks' => $tasks,
+//         ]);
